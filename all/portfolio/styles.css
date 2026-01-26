@@ -734,11 +734,11 @@ body {
 .spotify-player-box {
     background: linear-gradient(135deg, rgba(15, 20, 25, 0.95) 0%, rgba(10, 15, 20, 0.95) 100%);
     border: 2px solid rgba(0, 217, 255, 0.3);
-    border-radius: 20px;
-    padding: 1.5rem;
+    border-radius: 15px;
+    padding: 1rem;
     width: 100%;
-    max-width: 400px;
-    min-width: 350px;
+    max-width: 300px;
+    min-width: 280px;
     box-shadow: 0 8px 32px rgba(0, 217, 255, 0.2), 0 0 40px rgba(0, 217, 255, 0.1);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
@@ -782,19 +782,23 @@ body {
 
 .spotify-embed {
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     border-radius: 12px;
     overflow: hidden;
 }
 
+.spotify-embed iframe {
+    height: 120px !important;
+}
+
 .spotify-btn {
     width: 100%;
-    padding: 0.875rem 1.5rem;
+    padding: 0.625rem 1rem;
     background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
     color: white;
     border: none;
-    border-radius: 12px;
-    font-size: 1rem;
+    border-radius: 10px;
+    font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
