@@ -1,0 +1,38 @@
+# Alpha Feasibility Bounds — example config
+# Run: python -m tradability.feasibility.run --config configs/feasibility_example.yaml
+
+tickers:
+  - SPY
+  - QQQ
+  - IWM
+
+start_date: "2015-01-01"
+end_date: "2024-12-31"
+
+rebalance_frequency: daily
+fill_rule: next_open
+
+gross_edge_proxy:
+  type: ic
+  signal_name: momentum_12_1
+  scale: 0.5
+  method: spearman
+
+cost_model:
+  fee_bps: 5
+  spread_bps: 10
+  slippage_bps_per_turnover: 5
+  delay_bps: 2
+  impact:
+    type: sqrt
+    k: 10
+    adv_window: 20
+
+capacity:
+  aum_grid: [100000, 250000, 500000, 1000000, 2500000, 5000000, 10000000]
+  participation_rate_max: 0.01
+  adv_window: 20
+
+regimes:
+  vol_bins: 3
+  liquidity_bins: 3

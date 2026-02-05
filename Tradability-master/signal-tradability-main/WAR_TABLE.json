@@ -1,0 +1,36 @@
+{
+  "verdicts": [
+    {
+      "signal": "momentum_12_1",
+      "decision": "REJECT",
+      "max_aum": 0.0,
+      "cause_of_death": "Break-even 0.00% < 1.0%",
+      "annual_turnover": 3.96770286637061,
+      "break_even_cost": 0.0,
+      "annual_cost_drag": 0.05213886956167288,
+      "model_failure": false
+    },
+    {
+      "signal": "volatility_breakout",
+      "decision": "REJECT",
+      "max_aum": 0.0,
+      "cause_of_death": "Break-even 0.00% < 1.0%",
+      "annual_turnover": 24.680881821467292,
+      "break_even_cost": 0.0,
+      "annual_cost_drag": 0.315126856187406,
+      "model_failure": false
+    },
+    {
+      "signal": "ma_crossover",
+      "decision": "REJECT",
+      "max_aum": 0.0,
+      "cause_of_death": "Break-even 0.00% < 1.0%",
+      "annual_turnover": 4.415887850467289,
+      "break_even_cost": 0.0,
+      "annual_cost_drag": 0.05757959750728335,
+      "model_failure": false
+    }
+  ],
+  "test_passed": true,
+  "timestamp": "2026-01-15T20:42:00.857032Z"
+}

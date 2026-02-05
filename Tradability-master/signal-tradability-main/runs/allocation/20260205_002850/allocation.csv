@@ -1,0 +1,4 @@
+strategy,weight,amount,throttle,shutdown,reason
+momentum_12_1,0.0,0.0,True,True,regime_fragile; non_positive_net_edge; below_min_weight
+volatility_breakout,0.0,0.0,True,True,regime_fragile; non_positive_net_edge; below_min_weight
+ma_crossover,0.0,0.0,True,True,regime_fragile; non_positive_net_edge; below_min_weight

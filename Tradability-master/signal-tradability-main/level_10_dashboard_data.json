@@ -1,0 +1,133 @@
+{
+  "levels": {
+    "1": {
+      "name": "Retail Trader",
+      "income": 0,
+      "probability": 0.95,
+      "expected_value": 0.0
+    },
+    "2": {
+      "name": "Full-Time Trader",
+      "income": 100000,
+      "probability": 0.15,
+      "expected_value": 15000.0
+    },
+    "3": {
+      "name": "Small Fund",
+      "income": 300000,
+      "probability": 0.05,
+      "expected_value": 15000.0
+    },
+    "4": {
+      "name": "Established Fund",
+      "income": 2000000,
+      "probability": 0.01,
+      "expected_value": 20000.0
+    },
+    "5": {
+      "name": "Market Maker",
+      "income": 5000000,
+      "probability": 0.005,
+      "expected_value": 25000.0
+    },
+    "6": {
+      "name": "Prop Desk",
+      "income": 2000000,
+      "probability": 0.02,
+      "expected_value": 40000.0
+    },
+    "7": {
+      "name": "Quant Platform",
+      "income": 5000000,
+      "probability": 0.3,
+      "expected_value": 1500000.0
+    },
+    "8": {
+      "name": "Multi-Strat",
+      "income": 20000000,
+      "probability": 0.001,
+      "expected_value": 20000.0
+    },
+    "9": {
+      "name": "Pricing Power",
+      "income": 50000000,
+      "probability": 0.0001,
+      "expected_value": 5000.0
+    },
+    "10": {
+      "name": "Be The Market",
+      "income": 100000000,
+      "probability": 1e-05,
+      "expected_value": 1000.0000000000001
+    }
+  },
+  "projections": {
+    "years": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "alpha_success": [
+      0,
+      0,
+      150000,
+      150000,
+      150000,
+      150000,
+      150000,
+      150000,
+      150000,
+      150000,
+      150000
+    ],
+    "alpha_failure": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "alpha_expected": [
+      0,
+      0,
+      22500,
+      22500,
+      22500,
+      22500,
+      22500,
+      22500,
+      22500,
+      22500,
+      22500
+    ],
+    "infrastructure": [
+      0,
+      -100000,
+      0,
+      250000,
+      500000,
+      1000000,
+      2000000,
+      4000000,
+      6000000,
+      8000000,
+      8000000
+    ]
+  },
+  "recommendation": "STRONG RECOMMENDATION: Build infrastructure product",
+  "ev_ratio": 16425000.0
+}

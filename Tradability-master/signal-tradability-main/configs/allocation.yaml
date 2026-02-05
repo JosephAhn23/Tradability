@@ -1,0 +1,43 @@
+# Level 4: Capital allocation under uncertainty
+# Policy-based; no return maximization. Survivability under model error.
+# Run: python -m tradability.allocation.run --config configs/allocation.yaml
+
+total_capital: 1000000
+
+rebalance_frequency: daily
+
+strategies:
+  - name: momentum_12_1
+    max_capacity_aum: 500000
+    expected_net_edge_bps: null
+    uncertainty_score: 0.6
+    regime_confidence: 0.5
+    recent_drawdown_pct: null
+    turnover: null
+    correlation_group: trend
+  - name: volatility_breakout
+    max_capacity_aum: 300000
+    expected_net_edge_bps: null
+    uncertainty_score: 0.7
+    regime_confidence: 0.4
+    correlation_group: vol
+  - name: ma_crossover
+    max_capacity_aum: 400000
+    uncertainty_score: 0.5
+    regime_confidence: 0.6
+    correlation_group: trend
+
+allocation_rules:
+  max_weight_per_strategy: 0.4
+  min_weight_threshold: 0.02
+  correlation_penalty: 1.5
+  uncertainty_penalty: 1.5
+  regime_penalty: 0.5
+
+shutdown_rules:
+  max_drawdown_pct: 0.20
+  max_edge_decay_pct: null
+  min_regime_confidence: 0.2
+  min_net_edge_bps: 0.0
+  divergence_throttle_bps: 50
+  divergence_shutdown_bps: 150

@@ -1,0 +1,20 @@
+# Paper trading (broker-simulated) config
+# Use with: python -m tradability.paper.run --config configs/paper.yaml
+
+tickers:
+  - SPY
+  # - QQQ
+  # - IWM
+
+signal_name: momentum_12_1
+
+rebalance_frequency: daily   # or weekly
+
+order_type: market   # or limit
+
+position_sizing: equal_weight   # or fixed_dollar
+fixed_dollar_per_name: null     # used when position_sizing is fixed_dollar (e.g. 5000)
+
+max_position_pct: 0.25   # max 25% of equity per name
+
+dry_run: true   # set false to send real paper orders to Alpaca

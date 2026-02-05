@@ -1,0 +1,10 @@
+scenario,strategy,weight_base,weight_stress,amount_base,amount_stress
+2x_estimation_error,momentum_12_1,0.0,0.0,0.0,0.0
+2x_estimation_error,volatility_breakout,0.0,0.0,0.0,0.0
+2x_estimation_error,ma_crossover,0.0,0.0,0.0,0.0
+correlation_to_one,momentum_12_1,0.0,0.0,0.0,0.0
+correlation_to_one,volatility_breakout,0.0,0.0,0.0,0.0
+correlation_to_one,ma_crossover,0.0,0.0,0.0,0.0
+liquidity_shock,momentum_12_1,0.0,0.0,0.0,0.0
+liquidity_shock,volatility_breakout,0.0,0.0,0.0,0.0
+liquidity_shock,ma_crossover,0.0,0.0,0.0,0.0

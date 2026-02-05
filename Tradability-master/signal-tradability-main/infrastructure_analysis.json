@@ -1,0 +1,182 @@
+[
+  {
+    "opportunity": "Backtesting Platforms",
+    "viability_score": 0.77,
+    "capital_score": 1.0,
+    "skill_score": 0.67,
+    "competition_score": 0.6,
+    "time_score": 0.75,
+    "capital_gap": 0,
+    "skill_gaps": [
+      "product_management"
+    ],
+    "income_potential": "$500,000 - $10,000,000/year",
+    "time_to_revenue": "6-18 months",
+    "priority": "HIGH",
+    "action": "Start building Backtesting Platforms immediately. You have the capital and skills."
+  },
+  {
+    "opportunity": "Proprietary Cost Model Licensing",
+    "viability_score": 0.75,
+    "capital_score": 1.0,
+    "skill_score": 0.5,
+    "competition_score": 0.8,
+    "time_score": 0.69,
+    "capital_gap": 0,
+    "skill_gaps": [
+      "sales",
+      "academic"
+    ],
+    "income_potential": "$1,000,000 - $20,000,000/year",
+    "time_to_revenue": "12-18 months",
+    "priority": "HIGH",
+    "action": "Start building Proprietary Cost Model Licensing immediately. You have the capital and skills."
+  },
+  {
+    "opportunity": "Data Provision",
+    "viability_score": 0.64,
+    "capital_score": 1.0,
+    "skill_score": 0.5,
+    "competition_score": 0.3,
+    "time_score": 0.62,
+    "capital_gap": 0,
+    "skill_gaps": [
+      "data_engineering",
+      "sales"
+    ],
+    "income_potential": "$1,000,000 - $50,000,000/year",
+    "time_to_revenue": "12-24 months",
+    "priority": "MEDIUM",
+    "action": "Data Provision is viable but requires skill/capital acquisition first."
+  },
+  {
+    "opportunity": "Regulatory Compliance Tools",
+    "viability_score": 0.49,
+    "capital_score": 0.5,
+    "skill_score": 0.25,
+    "competition_score": 0.7,
+    "time_score": 0.62,
+    "capital_gap": 500000,
+    "skill_gaps": [
+      "regulatory",
+      "legal",
+      "enterprise_sales"
+    ],
+    "income_potential": "$2,000,000 - $50,000,000/year",
+    "time_to_revenue": "12-24 months",
+    "priority": "MEDIUM",
+    "action": "Regulatory Compliance Tools is viable but requires skill/capital acquisition first."
+  },
+  {
+    "opportunity": "Risk Management Tools",
+    "viability_score": 0.41,
+    "capital_score": 0.25,
+    "skill_score": 0.5,
+    "competition_score": 0.5,
+    "time_score": 0.44,
+    "capital_gap": 1500000,
+    "skill_gaps": [
+      "finance",
+      "enterprise_sales"
+    ],
+    "income_potential": "$5,000,000 - $100,000,000/year",
+    "time_to_revenue": "18-36 months",
+    "priority": "MEDIUM",
+    "action": "Risk Management Tools is viable but requires skill/capital acquisition first."
+  },
+  {
+    "opportunity": "Smart Beta Factory",
+    "viability_score": 0.21,
+    "capital_score": 0.1,
+    "skill_score": 0.0,
+    "competition_score": 0.5,
+    "time_score": 0.38,
+    "capital_gap": 4500000,
+    "skill_gaps": [
+      "finance",
+      "marketing",
+      "etf_distribution",
+      "academic"
+    ],
+    "income_potential": "$10,000,000 - $500,000,000/year",
+    "time_to_revenue": "24-36 months",
+    "priority": "LOW",
+    "action": "Smart Beta Factory not viable with current resources. Partner or choose different opportunity."
+  },
+  {
+    "opportunity": "Exchange Ownership",
+    "viability_score": 0.2,
+    "capital_score": 0.01,
+    "skill_score": 0.0,
+    "competition_score": 0.0,
+    "time_score": 1.0,
+    "capital_gap": 99500000,
+    "skill_gaps": [
+      "capital",
+      "regulatory",
+      "technology",
+      "market_structure"
+    ],
+    "income_potential": "$100,000,000 - $5,000,000,000/year",
+    "time_to_revenue": "0-0 months",
+    "priority": "LOW",
+    "action": "Exchange Ownership not viable with current resources. Partner or choose different opportunity."
+  },
+  {
+    "opportunity": "Execution Infrastructure",
+    "viability_score": 0.17,
+    "capital_score": 0.05,
+    "skill_score": 0.0,
+    "competition_score": 0.4,
+    "time_score": 0.38,
+    "capital_gap": 9500000,
+    "skill_gaps": [
+      "regulatory",
+      "sales",
+      "trading",
+      "capital_markets"
+    ],
+    "income_potential": "$10,000,000 - $500,000,000/year",
+    "time_to_revenue": "24-36 months",
+    "priority": "LOW",
+    "action": "Execution Infrastructure not viable with current resources. Partner or choose different opportunity."
+  },
+  {
+    "opportunity": "Index Construction",
+    "viability_score": 0.12,
+    "capital_score": 0.1,
+    "skill_score": 0.0,
+    "competition_score": 0.2,
+    "time_score": 0.25,
+    "capital_gap": 4500000,
+    "skill_gaps": [
+      "finance",
+      "regulatory",
+      "marketing",
+      "academic"
+    ],
+    "income_potential": "$10,000,000 - $1,000,000,000/year",
+    "time_to_revenue": "24-48 months",
+    "priority": "LOW",
+    "action": "Index Construction not viable with current resources. Partner or choose different opportunity."
+  },
+  {
+    "opportunity": "Order Flow Aggregation",
+    "viability_score": 0.02,
+    "capital_score": 0.01,
+    "skill_score": 0.0,
+    "competition_score": 0.1,
+    "time_score": 0,
+    "capital_gap": 49500000,
+    "skill_gaps": [
+      "capital",
+      "regulatory",
+      "hft",
+      "market_making"
+    ],
+    "income_potential": "$100,000,000 - $1,000,000,000/year",
+    "time_to_revenue": "36-60 months",
+    "priority": "LOW",
+    "action": "Order Flow Aggregation not viable with current resources. Partner or choose different opportunity."
+  }
+]

@@ -1,0 +1,31 @@
+# Shadow trading (forward execution simulation)
+# Run: python -m tradability.shadow.run --config configs/shadow.yaml
+# No broker. Deterministic fills; full logging; feasibility halt when bounds violated.
+
+tickers:
+  - SPY
+
+start_date: "2015-01-01"
+end_date: "2024-12-31"
+
+rebalance_frequency: daily
+fill_rule: next_open
+
+signal_name: momentum_12_1
+position_sizing: equal_weight
+fixed_dollar_per_name: null
+max_position_pct: 0.25
+initial_equity: 100000
+
+cost_model:
+  fee_bps: 5
+  spread_bps: 10
+  slippage_bps: 5
+  impact:
+    k: 10
+    adv_window: 20
+
+feasibility_halt:
+  enabled: true
+  max_aum: 50000000
+  min_net_edge_bps: null

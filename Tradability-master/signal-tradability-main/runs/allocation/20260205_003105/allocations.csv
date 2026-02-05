@@ -1,0 +1,4 @@
+strategy,weight,amount,throttle,shutdown,reason
+momentum_12_1,0.0,0.0,False,True,shutdown: below_min_weight_threshold
+volatility_breakout,0.0,0.0,True,True,shutdown: below_min_weight_threshold
+ma_crossover,0.0,0.0,False,True,shutdown: below_min_weight_threshold

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cities by Population and Income</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #202122;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 1px solid #a7d7f9;
+            padding-bottom: 10px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #eaecf0;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #a7d7f9;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        th:hover {
+            background-color: #c8ccd1;
+        }
+
+        th.sortable::after {
+            content: ' ↕';
+            opacity: 0.5;
+            font-size: 0.8em;
+        }
+
+        th.sort-asc::after {
+            content: ' ↑';
+            opacity: 1;
+        }
+
+        th.sort-desc::after {
+            content: ' ↓';
+            opacity: 1;
+        }
+
+        td {
+            padding: 10px 15px;
+            border: 1px solid #a7d7f9;
+            text-align: right;
+        }
+
+        td:first-child {
+            text-align: left;
+        }
+
+        td:nth-child(2) {
+            text-align: left;
+        }
+
+        td:nth-child(3) {
+            text-align: right;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #e6f2ff;
+        }
+
+        .income-cell {
+            font-weight: 500;
+            color: #0645ad;
+        }
+
+        .info {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e6f2ff;
+            border-left: 4px solid #0645ad;
+            font-size: 0.9em;
+            color: #202122;
+        }
+
+        .info a {
+            color: #0645ad;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Unified Cities Table -->
+    <div class="container">
+        <h1>Cities by Population and Median Income</h1>
+        
+        <div class="info">
+            Click on any column header to sort. Click again to reverse the sort order.
+        </div>
+
+        <div class="table-wrapper">
+            <table id="cityTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-sort="name" data-type="string">City</th>
+                        <th class="sortable" data-sort="country" data-type="string">Country</th>
+                        <th class="sortable" data-sort="population" data-type="number">Population</th>
+                        <th class="sortable" data-sort="income" data-type="number">Median Income (USD)</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // DATA DEFINITIONS
+        // ============================================
+        
+        const canadianData = [
+            { municipality: "Toronto", population: 2794356, income: 62160 },
+            { municipality: "Calgary", population: 1306784, income: 63640 },
+            { municipality: "Ottawa", population: 1017449, income: 64380 },
+            { municipality: "Edmonton", population: 1010899, income: 62900 },
+            { municipality: "Winnipeg", population: 749607, income: 48840 },
+            { municipality: "Mississauga", population: 717961, income: 68080 },
+            { municipality: "Vancouver", population: 662248, income: 66600 },
+            { municipality: "Brampton", population: 656480, income: 68820 },
+            { municipality: "Hamilton", population: 569353, income: 54760 },
+            { municipality: "Surrey", population: 568322, income: 60680 },
+            { municipality: "Halifax", population: 439819, income: 58460 },
+            { municipality: "Laval", population: 438366, income: 66600 },
+            { municipality: "London", population: 422324, income: 57720 },
+            { municipality: "Markham", population: 338503, income: 82140 },
+            { municipality: "Vaughan", population: 323103, income: 83620 },
+            { municipality: "Saskatoon", population: 266141, income: 49580 },
+            { municipality: "Kitchener", population: 256885, income: 69560 },
+            { municipality: "Longueuil", population: 254483, income: 65120 },
+            { municipality: "Burnaby", population: 249125, income: 71780 },
+            { municipality: "Windsor", population: 229660, income: 54760 },
+            { municipality: "Regina", population: 226404, income: 50320 },
+            { municipality: "Oakville", population: 213759, income: 90280 },
+            { municipality: "Richmond (BC)", population: 209937, income: 74740 },
+            { municipality: "Richmond Hill", population: 202022, income: 84360 },
+            { municipality: "Burlington", population: 186948, income: 80660 },
+            { municipality: "Oshawa", population: 175383, income: 55500 },
+            { municipality: "Sherbrooke", population: 172950, income: 42920 },
+            { municipality: "Abbotsford", population: 153524, income: 43660 },
+            { municipality: "Lévis", population: 149683, income: 41440 },
+            { municipality: "Coquitlam", population: 148625, income: 74000 },
+            { municipality: "Barrie", population: 147829, income: 56240 },
+            { municipality: "Saguenay", population: 144723, income: 40700 },
+            { municipality: "Kelowna", population: 144576, income: 62160 },
+            { municipality: "Guelph", population: 143740, income: 75480 },
+            { municipality: "Trois-Rivières", population: 139163, income: 42180 },
+            { municipality: "Whitby", population: 138501, income: 77700 },
+            { municipality: "Cambridge", population: 138479, income: 70300 },
+            { municipality: "St. Catharines", population: 136803, income: 54020 },
+            { municipality: "Milton", population: 132979, income: 85840 },
+            { municipality: "Langley (District)", population: 132603, income: 59940 },
+            { municipality: "Kingston", population: 132485, income: 56980 },
+            { municipality: "Ajax", population: 126666, income: 79180 },
+            { municipality: "Waterloo", population: 121436, income: 76220 },
+            { municipality: "Terrebonne", population: 119944, income: 53280 },
+            { municipality: "Saanich", population: 117735, income: 59200 },
+            { municipality: "Brantford", population: 104688, income: 51060 },
+            { municipality: "Red Deer", population: 100844, income: 48100 },
+            { municipality: "Nanaimo", population: 99863, income: 45880 },
+            { municipality: "Pickering", population: 99186, income: 78440 },
+            { municipality: "Lethbridge", population: 98406, income: 47360 },
+            { municipality: "Kamloops", population: 97902, income: 46620 },
+            { municipality: "Saint-Jean-sur-Richelieu", population: 97873, income: 38480 },
+            { municipality: "Niagara Falls", population: 94415, income: 53280 },
+            { municipality: "Chilliwack", population: 93203, income: 44400 },
+            { municipality: "Victoria", population: 91867, income: 61420 },
+            { municipality: "Brossard", population: 91525, income: 65860 },
+            { municipality: "North Vancouver (District)", population: 88168, income: 72520 },
+            { municipality: "Newmarket", population: 87942, income: 81400 },
+            { municipality: "Repentigny", population: 86100, income: 36260 },
+            { municipality: "Peterborough", population: 83651, income: 52540 },
+            { municipality: "Saint-Jérôme", population: 80213, income: 37740 },
+            { municipality: "Moncton", population: 79470, income: 59200 },
+            { municipality: "Drummondville", population: 79258, income: 39960 },
+            { municipality: "Prince George", population: 76708, income: 45140 },
+            { municipality: "Caledon", population: 76581, income: 86580 },
+            { municipality: "Granby", population: 69025, income: 39220 },
+            { municipality: "St. Albert", population: 68232, income: 71040 },
+            { municipality: "Halton Hills", population: 62951, income: 87320 },
+            { municipality: "Aurora", population: 62057, income: 88800 },
+            { municipality: "Port Coquitlam", population: 61498, income: 73260 },
+            { municipality: "Mirabel", population: 61108, income: 35520 },
+            { municipality: "Saint-Hyacinthe", population: 57239, income: 37000 },
+            { municipality: "Belleville", population: 55071, income: 51800 },
+        ];
+
+        const usData = [
+            { city: "New York", population: 8478072, income: 75000 },
+            { city: "Los Angeles", population: 3878704, income: 76000 },
+            { city: "Chicago", population: 2721308, income: 65000 },
+            { city: "Houston", population: 2390125, income: 60000 },
+            { city: "Phoenix", population: 1673164, income: 68000 },
+            { city: "Philadelphia", population: 1573916, income: 54000 },
+            { city: "San Antonio", population: 1526656, income: 58000 },
+            { city: "San Diego", population: 1404452, income: 89000 },
+            { city: "Dallas", population: 1326087, income: 63000 },
+            { city: "Jacksonville", population: 1009833, income: 62000 },
+            { city: "Fort Worth", population: 1008106, income: 72000 },
+            { city: "San Jose", population: 997368, income: 126000 },
+            { city: "Austin", population: 993588, income: 86000 },
+            { city: "Charlotte", population: 943476, income: 74000 },
+            { city: "Columbus", population: 933263, income: 62000 },
+            { city: "Indianapolis", population: 891484, income: 61000 },
+            { city: "San Francisco", population: 827526, income: 136000 },
+            { city: "Seattle", population: 780995, income: 105000 },
+            { city: "Denver", population: 729019, income: 85000 },
+            { city: "Oklahoma City", population: 712919, income: 60000 },
+            { city: "Nashville", population: 704963, income: 70000 },
+            { city: "Washington, DC", population: 702250, income: 101000 },
+            { city: "El Paso", population: 681723, income: 54000 },
+            { city: "Las Vegas", population: 678922, income: 59000 },
+            { city: "Boston", population: 673458, income: 92000 },
+            { city: "Detroit", population: 645705, income: 38000 },
+            { city: "Louisville", population: 640796, income: 60000 },
+            { city: "Portland", population: 635749, income: 80000 },
+            { city: "Memphis", population: 610919, income: 46000 },
+            { city: "Baltimore", population: 568271, income: 55000 },
+            { city: "Milwaukee", population: 563531, income: 47000 },
+            { city: "Albuquerque", population: 560326, income: 55000 },
+            { city: "Tucson", population: 554013, income: 56000 },
+            { city: "Fresno", population: 550105, income: 54000 },
+            { city: "Sacramento", population: 535798, income: 71000 },
+            { city: "Atlanta", population: 520070, income: 69000 },
+            { city: "Mesa", population: 517151, income: 68000 },
+            { city: "Kansas City", population: 516032, income: 59000 },
+            { city: "Raleigh", population: 499825, income: 78000 },
+            { city: "Colorado Springs", population: 493554, income: 72000 },
+            { city: "Omaha", population: 489265, income: 67000 },
+            { city: "Miami", population: 487014, income: 51000 },
+            { city: "Virginia Beach", population: 454808, income: 81000 },
+            { city: "Long Beach", population: 450901, income: 74000 },
+            { city: "Oakland", population: 443554, income: 91000 },
+            { city: "Minneapolis", population: 428579, income: 82000 },
+            { city: "Bakersfield", population: 417468, income: 56000 },
+            { city: "Tulsa", population: 415154, income: 55000 },
+            { city: "Tampa", population: 414547, income: 65000 },
+            { city: "Arlington (TX)", population: 403672, income: 72000 },
+            { city: "Aurora (CO)", population: 403130, income: 71000 },
+            { city: "Wichita", population: 400991, income: 58000 },
+            { city: "Cleveland", population: 365379, income: 36000 },
+            { city: "New Orleans", population: 362701, income: 44000 },
+            { city: "Henderson", population: 350039, income: 85000 },
+            { city: "Honolulu", population: 344967, income: 92000 },
+            { city: "Anaheim", population: 344561, income: 76000 },
+            { city: "Orlando", population: 334854, income: 61000 },
+            { city: "Lexington", population: 329437, income: 67000 },
+            { city: "Stockton", population: 324975, income: 62000 },
+            { city: "Riverside", population: 323757, income: 70000 },
+            { city: "Irvine", population: 318683, income: 125000 },
+            { city: "Corpus Christi", population: 317317, income: 59000 },
+            { city: "Newark", population: 317303, income: 45000 },
+            { city: "Santa Ana", population: 316184, income: 70000 },
+            { city: "Cincinnati", population: 314915, income: 61000 },
+            { city: "Pittsburgh", population: 307668, income: 67000 },
+            { city: "Saint Paul", population: 307465, income: 73000 },
+            { city: "Greensboro", population: 307381, income: 56000 },
+            { city: "Jersey City", population: 302824, income: 85000 },
+            { city: "Durham", population: 301870, income: 71000 },
+            { city: "Lincoln", population: 300619, income: 67000 },
+            { city: "North Las Vegas", population: 294034, income: 63000 },
+            { city: "Plano", population: 293286, income: 99000 },
+            { city: "Anchorage", population: 289600, income: 88000 },
+            { city: "Gilbert", population: 288790, income: 92000 },
+            { city: "Madison", population: 285300, income: 73000 },
+            { city: "Reno", population: 281714, income: 67000 },
+            { city: "Chandler", population: 281231, income: 88000 },
+            { city: "St. Louis", population: 279695, income: 41000 },
+            { city: "Chula Vista", population: 278546, income: 87000 },
+            { city: "Buffalo", population: 276617, income: 41000 },
+            { city: "Fort Wayne", population: 273203, income: 58000 },
+            { city: "Lubbock", population: 272086, income: 54000 },
+            { city: "St. Petersburg", population: 267102, income: 63000 },
+            { city: "Toledo", population: 265638, income: 42000 },
+            { city: "Laredo", population: 261260, income: 54000 },
+            { city: "Port St. Lucie", population: 258575, income: 63000 },
+            { city: "Glendale (AZ)", population: 258143, income: 63000 },
+            { city: "Irving", population: 258060, income: 67000 },
+            { city: "Winston-Salem", population: 255769, income: 56000 },
+            { city: "Chesapeake", population: 254997, income: 81000 },
+            { city: "Garland", population: 250431, income: 63000 },
+            { city: "Scottsdale", population: 246170, income: 96000 },
+            { city: "Boise", population: 237963, income: 78000 },
+            { city: "Hialeah", population: 235388, income: 47000 },
+            { city: "Frisco", population: 235208, income: 127000 },
+            { city: "Richmond (VA)", population: 233655, income: 54000 },
+            { city: "Cape Coral", population: 233025, income: 62000 },
+            { city: "Norfolk", population: 231105, income: 53000 }
+        ];
+
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+
+        function formatCurrency(amount) {
+            return `~$${amount.toLocaleString()}`;
+        }
+
+        function formatNumber(number) {
+            return number.toLocaleString();
+        }
+
+        // ============================================
+        // TABLE MANAGER CLASS
+        // ============================================
+
+        class SortableTable {
+            constructor(tableId, data, config) {
+                this.tableId = tableId;
+                this.data = data;
+                this.config = config;
+                this.currentSort = { column: config.defaultSort.column, direction: config.defaultSort.direction };
+                this.init();
+            }
+
+            init() {
+                this.render();
+                this.updateSortIndicators(this.currentSort.column, this.currentSort.direction);
+                this.attachEventListeners();
+            }
+
+            render() {
+                const tbody = document.getElementById(this.config.tbodyId);
+                const nameKey = this.config.nameKey;
+                
+                tbody.innerHTML = this.data.map(item => `
+                    <tr>
+                        <td>${item[nameKey]}</td>
+                        <td>${item.country || ''}</td>
+                        <td>${formatNumber(item.population)}</td>
+                        <td class="income-cell">${formatCurrency(item.income)}</td>
+                    </tr>
+                `).join('');
+            }
+
+            sortData(column, direction) {
+                const sorted = [...this.data].sort((a, b) => {
+                    let aVal = a[column];
+                    let bVal = b[column];
+
+                    if (typeof aVal === 'string') {
+                        aVal = aVal.toLowerCase();
+                        bVal = bVal.toLowerCase();
+                    }
+
+                    if (direction === 'asc') {
+                        return aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
+                    } else {
+                        return aVal < bVal ? 1 : aVal > bVal ? -1 : 0;
+                    }
+                });
+
+                return sorted;
+            }
+
+            updateSortIndicators(column, direction) {
+                const table = document.getElementById(this.tableId);
+                table.querySelectorAll('th').forEach(th => {
+                    th.classList.remove('sort-asc', 'sort-desc');
+                });
+
+                const header = table.querySelector(`th[data-sort="${column}"]`);
+                if (header) {
+                    header.classList.add(direction === 'asc' ? 'sort-asc' : 'sort-desc');
+                }
+            }
+
+            handleSort(column) {
+                if (this.currentSort.column === column) {
+                    this.currentSort.direction = this.currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    this.currentSort.column = column;
+                    this.currentSort.direction = 'asc';
+                }
+
+                this.data = this.sortData(this.currentSort.column, this.currentSort.direction);
+                this.render();
+                this.updateSortIndicators(this.currentSort.column, this.currentSort.direction);
+            }
+
+            attachEventListeners() {
+                const table = document.getElementById(this.tableId);
+                table.querySelectorAll('th.sortable').forEach(th => {
+                    th.addEventListener('click', () => {
+                        this.handleSort(th.dataset.sort);
+                    });
+                });
+            }
+        }
+
+        // ============================================
+        // COMBINED DATA PREPARATION
+        // ============================================
+
+        function prepareCombinedData() {
+            // Normalize Canadian data
+            const normalizedCanadian = canadianData.map(item => ({
+                name: item.municipality,
+                country: "Canada",
+                population: item.population,
+                income: item.income
+            }));
+
+            // Normalize US data
+            const normalizedUS = usData.map(item => ({
+                name: item.city,
+                country: "USA",
+                population: item.population,
+                income: item.income
+            }));
+
+            // Add Seoul
+            const seoul = {
+                name: "Seoul",
+                country: "South Korea",
+                population: 9720846,
+                income: 35000
+            };
+
+            // Combine all cities
+            const combined = [...normalizedCanadian, ...normalizedUS, seoul];
+
+            return combined;
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Prepare unified data
+            const allCitiesData = prepareCombinedData();
+            
+            // Initialize unified table
+            const cityTable = new SortableTable('cityTable', allCitiesData, {
+                tbodyId: 'tableBody',
+                nameKey: 'name',
+                defaultSort: { column: 'population', direction: 'desc' }
+            });
+        });
+    </script>
+</body>
+</html>
